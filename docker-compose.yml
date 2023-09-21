@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  midjourney_proxy_redis:
+    container_name: midjourney_proxy_redis
+    image: redis
+    command: redis-server --requirepass midjourney0proxy0redis
+    ports:
+      - "6379:6379"
+    networks:
+      - default
+    volumes:
+      - redis-data:/data
+
+  midjourney_proxy:
+    container_name: midjourney_proxy
+    image: novicezk/midjourney-proxy:2.5.1
+    depends_on:
+      - midjourney_proxy_redis
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./config:/home/spring/config
+    networks:
+      - default
