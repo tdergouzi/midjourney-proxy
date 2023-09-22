@@ -10,7 +10,7 @@ services:
     networks:
       - default
     volumes:
-      - redis-data:/data
+      - ./redis-data:/data
 
   midjourney_proxy:
     container_name: midjourney_proxy
