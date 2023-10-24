@@ -80,4 +80,10 @@ public class DiscordLoadBalancer {
 		return null;
 	}
 
+	public void refreshInstances(List<DiscordInstance> newInstances) {
+		synchronized (instances) {
+			instances.clear();
+			instances.addAll(newInstances);
+		}
+	}
 }
